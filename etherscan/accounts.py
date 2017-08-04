@@ -13,6 +13,8 @@ class Account(Client):
                 + self.module \
                 + self.action \
                 + self.address \
+                + self.start \
+                + self.end \
                 + self.tag \
                 + self.key
         elif call_type == 'transactions':
@@ -88,13 +90,15 @@ class Account(Client):
         req = self.connect()
         return req['result']
 
-    def get_all_transactions(self, offset=10000, sort='asc', internal=False) -> list:
+    def get_all_transactions(self, offset=10000, sort='asc', internal=False, startblock=0, endblock=999999999) -> list:
         if internal:
             self.action = self.URL_BASES['action'] + 'txlistinternal'
         else:
             self.action = self.URL_BASES['action'] + 'txlist'
         self.page = self.URL_BASES['page'] + str(1)
         self.offset = self.URL_BASES['offset'] + str(offset)
+        self.start = self.URL_BASES['start'] + str(startblock)
+        self.end = self.URL_BASES['end'] + str(endblock)
         self.sort = self.URL_BASES['sort'] + sort
         self.make_url(call_type='transactions')
 

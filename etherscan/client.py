@@ -16,6 +16,8 @@ class Client(object):
         blocktype='&blocktype=',
         key='&apikey=',
         address='&address=',
+        start='&startblock=',
+        end='&endblock='
     )
 
     def __init__(self, address, api_key='YourApiKeyToken'):
@@ -28,6 +30,8 @@ class Client(object):
         self.page = ''
         self.sort = ''
         self.blocktype = ''
+        self.start=''
+        self.end=''
 
         self.API_KEY = str(api_key)
         self.check_and_get_api()
